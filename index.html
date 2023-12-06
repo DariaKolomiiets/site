@@ -22,9 +22,9 @@
         клієнтів, то ця цифра буде дорівнює 200 гривням.
       </div>
       <div class="card width-30">
-        <strong>Як розрахувати:</strong> CCA = (Витрати на кампанію + Витрати на співробітників +
-        Витрати на програмне забезпечення + Технічні витрати) / Кількість нових
-        клієнтів
+        <strong>Як розрахувати:</strong> CАС = (Витрати на кампанію + Витрати на
+        співробітників + Витрати на програмне забезпечення + Технічні витрати) /
+        Кількість нових клієнтів
       </div>
       <div class="card">
         Існують різні способи знизити витрати на залучення клієнтів, але вся
@@ -162,6 +162,32 @@
           витрат.<br /><br />
         </p>
       </div>
+      <div class="card calc">
+        <h2>Калькулятор САС</h2>
+        <div class="calc__value">
+          <p>Витрати на кампанію</p>
+          <input class="calc__input" type="number" id="val1" />
+        </div>
+        <div class="calc__value">
+          <p>Витрати на співробітників</p>
+          <input class="calc__input" type="number" id="val2" />
+        </div>
+        <div class="calc__value">
+          <p>Витрати на програмне забезпечення</p>
+          <input class="calc__input" type="number" id="val3" />
+        </div>
+        <div class="calc__value">
+          <p>Технічні витрати</p>
+          <input class="calc__input" type="number" id="val4" />
+        </div>
+        <div class="calc__value">
+          <p>Кількість нових клієнтів</p>
+          <input class="calc__input" type="number" id="val5" />
+        </div>
+
+        <button class="calc__button" id="calculate">Розрахувати</button>
+        <div class="calc__result">САС: <span id="calc__result"></span></div>
+      </div>
       <div class="card">
         <h2>Тести</h2>
         <div class="test">
@@ -236,6 +262,28 @@
         setChecker(test.id, test);
       });
 
+      document
+        .querySelector("#calculate")
+        .addEventListener("click", calculateCCA);
+
+      function calculateCCA() {
+        let val1 = document.querySelector("#val1").value,
+          val2 = document.querySelector("#val2").value,
+          val3 = document.querySelector("#val3").value,
+          val4 = document.querySelector("#val4").value,
+          val5 = document.querySelector("#val5").value;
+
+        if (val1 && val2 && val3 && val4 && val5) {
+          document.querySelector("#calc__result").innerHTML = (
+            (+val1 + +val2 + +val3 + +val4) /
+            +val5
+          ).toFixed(2);
+        } else {
+          document.querySelector("#calc__result").innerHTML =
+            "Заповніть всі вікна для розрахування";
+        }
+      }
+
       function setChecker(id, test) {
         const images = [].slice.call(test.querySelectorAll(".test__answer"), 0);
 
@@ -248,12 +296,13 @@
       }
 
       function setAnswer(id, answer) {
-        const element = document.getElementById(id).querySelector('.test__variants');
+        const element = document
+          .getElementById(id)
+          .querySelector(".test__variants");
         answer
-          ? element.style.borderColor = 'green'
-          : element.style.borderColor = 'red'
+          ? (element.style.borderColor = "green")
+          : (element.style.borderColor = "red");
       }
     </script>
   </body>
 </html>
-
